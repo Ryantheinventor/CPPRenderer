@@ -4,36 +4,40 @@
 
 #include "context.h"
 #include "render.h"
+#include "utils.h"
 
 using namespace ryan;
 
 int main() 
 {
+	
+
+
 	context window;
 	window.init(640, 480, "Hello Window");
 
 	//create triangle
 	vertex triVerts[] =
 	{
-		{ { -.5f, -.5f, 0, 1} },
-		{ { .5f, -.5f, 0, 1} },
-		{ { 0, .5f, 0, 1} }
+		{ { -.5f, -.5f, 0, 1}, {1,0,0,1} },
+		{ { -.2f, -.5f, 0, 1}, {0,1,0,1} },
+		{ { -.35, -.2f, 0, 1}, {0,0,1,1} }
 	};
 	unsigned int triIndices[] = { 0, 1, 2 };
 	geometry basicTriGeo = makeGeometry(triVerts, 3, triIndices, 3);
 
-	//create shader
-	const char * basicVert = 
-		"#version 430 core\n"
-		"layout (location = 0) in vec4 position;\n"
-		"void main() { gl_Position = position; }";
+	//create rectangle
+	vertex recVerts[] =
+	{
+		{ { -.5f, .2f, 0, 1}, {0,1,0,1} },
+		{ { -.2f, .2f, 0, 1}, {1,0,0,1} },
+		{ { -.2f, .5f, 0, 1}, {0,1,0,1} },
+		{ { -.5f, .5f, 0, 1}, {0,0,1,1} }
+	};
+	unsigned int recIndices[] = { 0, 1, 2 , 0, 2, 3};
+	geometry basicRecGeo = makeGeometry(recVerts, 4, recIndices, 6);
 
-	const char* basicFrag =
-		"#version 430 core\n"
-		"out vec4 vertColor;\n"
-		"void main() { vertColor = vec4(1.0, 0.0, 0.0, 1.0); }";
-
-	shader basicShad = makeShader(basicVert, basicFrag);
+	shader basicShad = loadShader("res\\basic.vert", "res\\basic.frag");
 
 	//update-draw loop
 	while (!window.shouldClose()) 
@@ -47,6 +51,8 @@ int main()
 		window.clear();
 
 		draw(basicShad, basicTriGeo);
+
+		draw(basicShad, basicRecGeo);
 
 	}
 

@@ -9,6 +9,7 @@ namespace ryan
 	struct vertex 
 	{
 		vec4 pos;
+		vec4 color;
 	};
 
 	struct geometry

@@ -26,6 +26,9 @@ namespace ryan
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)0);
 
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)16);
+
 		//unbind buffers
 		glBindVertexArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
