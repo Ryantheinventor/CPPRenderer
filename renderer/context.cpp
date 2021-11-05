@@ -1,9 +1,6 @@
 #include "context.h"
 
-#include <iostream>
 
-#include "glew/glew.h"
-#include "glfw/glfw3.h"
 
 namespace ryan 
 {
@@ -18,6 +15,7 @@ namespace ryan
 
 	bool context::init(int width, int height, const char* title)
 	{
+		gameTime.resetTime();
 		//init glfw
 		glfwInit();
 
@@ -65,6 +63,7 @@ namespace ryan
 	{
 		glfwSwapBuffers(window);
 		glfwPollEvents();
+		gameTime.updateTime();
 	}
 
 	void context::clear()

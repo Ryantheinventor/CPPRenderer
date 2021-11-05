@@ -153,11 +153,13 @@
     <ClCompile Include="context.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="render.cpp" />
+    <ClCompile Include="time.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="context.h" />
     <ClInclude Include="render.h" />
+    <ClInclude Include="time.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>

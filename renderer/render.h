@@ -2,6 +2,7 @@
 
 #include "glew/glew.h"
 #include "glm/glm.hpp"
+
 using namespace glm;
 
 namespace ryan 

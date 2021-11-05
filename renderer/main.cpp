@@ -1,16 +1,19 @@
 #include "glm/glm.hpp"
-
 #include <iostream>
 
 #include "context.h"
 #include "render.h"
 #include "utils.h"
+#include "glfw/glfw3.h"
+#include "time.h"
 
 using namespace ryan;
 
 int main() 
 {
-	
+
+
+	std::cout << glfwGetTime();
 
 
 	context window;
@@ -45,8 +48,7 @@ int main()
 		window.tick();
 		
 		//update
-		
-
+		std::cout << window.gameTime.deltaTime() << "\n";
 		//draw
 		window.clear();
 
