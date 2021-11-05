@@ -46,6 +46,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <None Include="res\mvp.vert">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="res\basic.vert">
       <Filter>Resource Files</Filter>
     </None>

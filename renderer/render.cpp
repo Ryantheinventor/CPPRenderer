@@ -93,4 +93,9 @@ namespace ryan
 		//draw the object
 		glDrawElements(GL_TRIANGLES, geo.size, GL_UNSIGNED_INT, nullptr);
 	}
+
+	void setUniform(const shader& shad, GLuint location, const mat4& value)
+	{
+		glProgramUniformMatrix4fv(shad.program, location, 1, GL_FALSE, &value[0][0]);
+	}
 }

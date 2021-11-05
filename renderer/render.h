@@ -31,4 +31,6 @@ namespace ryan
 	void freeShader(shader& shad);
 
 	void draw(const shader& shad, const geometry& geo);
+
+	void setUniform(const shader& shad, GLuint location, const mat4& value);
 }

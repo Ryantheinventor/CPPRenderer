@@ -163,8 +163,15 @@
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\basic.frag" />
-    <None Include="res\basic.vert" />
+    <None Include="res\basic.frag">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="res\basic.vert">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\mvp.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
