@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+
 using namespace std;
 namespace ryan
 {
@@ -45,4 +46,5 @@ namespace ryan
 
 		return makeShader(vCodeS.c_str(),fCodeS.c_str());
 	}
+
 }
