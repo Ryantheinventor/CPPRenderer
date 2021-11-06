@@ -1,5 +1,8 @@
 #include "render.h"
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb/stb_image.h"
+
 namespace ryan 
 {
 	geometry makeGeometry(const vertex* verts, GLsizei vertCount, const GLuint* indices, GLsizei indexCount)
@@ -28,6 +31,9 @@ namespace ryan
 
 		glEnableVertexAttribArray(1);
 		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)16);
+
+		glEnableVertexAttribArray(2);
+		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)32);
 
 		//unbind buffers
 		glBindVertexArray(0);
@@ -83,6 +89,61 @@ namespace ryan
 		shad = {};
 	}
 
+	texture loadTexture(const char* imagePath)
+	{
+
+		int imageWidth, imageHeight, imageFormat;
+		unsigned char* rawPixelData = nullptr;
+
+		stbi_set_flip_vertically_on_load(true);
+		rawPixelData = stbi_load(imagePath, &imageWidth, &imageHeight, &imageFormat, STBI_default);
+
+		texture tex = makeTexture(imageWidth, imageHeight, imageFormat, rawPixelData);
+		stbi_image_free(rawPixelData);
+
+		return tex;
+	}
+
+	texture makeTexture(unsigned width, unsigned height, unsigned channels, const unsigned char* pixels)
+	{
+		texture tex = { 0, width, height, channels };
+
+		GLenum oglFormat = GL_RED;
+		switch (channels) 
+		{
+		case 1:
+			oglFormat = GL_RED;
+			break;
+		case 2:
+			oglFormat = GL_RG;
+			break;
+		case 3:
+			oglFormat = GL_RGB;
+			break;
+		case 4:
+			oglFormat = GL_RGBA;
+			break;
+		}
+
+		glGenTextures(1, &tex.handle);
+		glBindTexture(GL_TEXTURE_2D, tex.handle);
+
+		glTexImage2D(GL_TEXTURE_2D, 0, oglFormat, width, height, 0, oglFormat, GL_UNSIGNED_BYTE, pixels);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		glBindTexture(GL_TEXTURE_2D, 0);
+
+		return tex;
+	}
+
+	void freeTexture(texture& tex)
+	{
+		glDeleteTextures(1, &tex.handle);
+		tex = {};
+	}
+
 	void draw(const shader& shad, const geometry& geo)
 	{
 		//bind the shader program
@@ -98,4 +159,14 @@ namespace ryan
 	{
 		glProgramUniformMatrix4fv(shad.program, location, 1, GL_FALSE, &value[0][0]);
 	}
+
+	void setUniform(const shader& shad, GLuint location, const texture& value, int textureSlot)
+	{
+		glActiveTexture(GL_TEXTURE0 + textureSlot);
+		glBindTexture(GL_TEXTURE_2D, value.handle);
+		glProgramUniform1i(shad.program, location, textureSlot);
+	}
+
+
+
 }

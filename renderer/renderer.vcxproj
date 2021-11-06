@@ -171,6 +171,7 @@
     <None Include="res\basic.vert">
       <FileType>Document</FileType>
     </None>
+    <None Include="res\mvp.frag" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\mvp.vert" />

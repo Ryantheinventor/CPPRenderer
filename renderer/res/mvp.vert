@@ -6,6 +6,7 @@
 //vertex attributes
 layout (location = 0) in vec4 position; // index 0 - the vertex position
 layout (location = 1) in vec4 colors; // index 1 - the vertex color
+layout (location = 2) in vec2 uvs; // index 1 - the vertex color
 
 //uniforms
 layout (location = 0) uniform mat4 proj;
@@ -13,11 +14,12 @@ layout (location = 1) uniform mat4 view;
 layout (location = 2) uniform mat4 model;
 
 out vec4 vertColor;
+out vec2 vertUVs;
 
 //each shader needs a main function
 void main()
 {
-  
+  vertUVs = uvs;
   vertColor = colors;
 
 
