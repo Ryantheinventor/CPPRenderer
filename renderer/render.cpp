@@ -35,6 +35,9 @@ namespace ryan
 		glEnableVertexAttribArray(2);
 		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)32);
 
+		glEnableVertexAttribArray(3);
+		glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)40);
+
 		//unbind buffers
 		glBindVertexArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -158,6 +161,11 @@ namespace ryan
 	void setUniform(const shader& shad, GLuint location, const mat4& value)
 	{
 		glProgramUniformMatrix4fv(shad.program, location, 1, GL_FALSE, &value[0][0]);
+	}
+
+	void setUniform(const shader& shad, GLuint location, const vec3& value)
+	{
+		glProgramUniform3fv(shad.program, location, 1, value_ptr(value));
 	}
 
 	void setUniform(const shader& shad, GLuint location, const texture& value, int textureSlot)

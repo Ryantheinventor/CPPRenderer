@@ -2,6 +2,7 @@
 
 #include "glew/glew.h"
 #include "glm/glm.hpp"
+#include "glm/ext.hpp"
 
 
 
@@ -14,6 +15,7 @@ namespace ryan
 		vec4 pos;
 		vec4 color;
 		vec2 uv;
+		vec3 normals;
 	};
 	
 	struct geometry
@@ -46,6 +48,8 @@ namespace ryan
 	void draw(const shader& shad, const geometry& geo);
 
 	void setUniform(const shader& shad, GLuint location, const mat4& value);
+
+	void setUniform(const shader& shad, GLuint location, const vec3& value);
 
 	void setUniform(const shader& shad, GLuint location, const texture& value, int textureSlot);
 }
